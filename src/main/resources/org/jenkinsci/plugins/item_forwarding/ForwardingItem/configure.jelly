@@ -1,0 +1,35 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
+    <l:layout title="${it.name} Forwarder Config" norefresh="true" permission="${it.EXTENDED_READ}">
+        <st:include page="sidepanel.jelly" />
+        <l:main-panel>
+            <div class="behavior-loading">${%LOADING}</div>
+            <f:form method="post" action="configSubmit" name="config">
+                <j:set var="descriptor" value="${it.descriptor}" />
+                <j:set var="instance" value="${it}" />
+
+                <f:entry title="${%Name}" field="name" help="/plugin/item-forwarder/help/name.html">
+                    <f:textbox />
+                </f:entry>
+
+                <f:entry title="${%Forwarded Item}" field="referredItemName" help="/plugin/item-forwarder/help/forwarded-item.html">
+                    <f:textbox />
+                </f:entry>
+
+                <f:entry title="${%Description}" field="description" help="/plugin/item-forwarder/help/description.html">
+                    <f:textarea codemirror-mode="${app.markupFormatter.codeMirrorMode}" codemirror-config="${app.markupFormatter.codeMirrorConfig}" previewEndpoint="/markupFormatter/previewDescription" />
+                </f:entry>
+
+                <f:entry title="${%Forward Immediately}" field="forwardImmediately" help="/plugin/item-forwarder/help/forward-immediately.html">
+                    <f:checkbox checked="${it.forwardImmediately}" />
+                </f:entry>
+
+                <j:if test="${h.hasPermission(it,it.CONFIGURE)}">
+                    <f:bottomButtonBar>
+                        <f:submit value="${%Save}" />
+                        <f:apply/>
+                    </f:bottomButtonBar>
+                </j:if>
+            </f:form>
+        </l:main-panel>
+    </l:layout>
+</j:jelly>

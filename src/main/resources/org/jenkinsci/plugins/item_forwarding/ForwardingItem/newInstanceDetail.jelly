@@ -1,0 +1,4 @@
+<?jelly escape-by-default='true'?>
+<div>
+    Creates an item that forwards requests to another specified item. Useful when renaming jobs that are linked e.g. from external documentation.
+</div>

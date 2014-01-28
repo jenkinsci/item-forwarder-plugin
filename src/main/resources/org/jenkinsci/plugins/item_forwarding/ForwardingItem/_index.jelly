@@ -1,0 +1,31 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
+    <l:layout title="${it.displayName} Config" norefresh="true" permission="${it.READ}">
+        <st:include page="sidepanel.jelly" />
+        <l:main-panel>
+            <j:choose>
+                <j:when test="${it.referredItemExists}">
+                    <h1>${%The item you want to access has been moved.}</h1>
+
+                    <div>
+                        <t:editableDescription permission="${it.UPDATE}" />
+                    </div>
+
+                    <div>
+                        <a href="${rootURL}/${it.referredUrl}">
+                            <img src="${resURL}/plugin/item-forwarder/images/16x16/forward.png" style="border:0" />
+                            Go to the item at its new location <strong>${it.referredItem.fullDisplayName}</strong>
+                        </a>
+                    </div>
+                </j:when>
+                <j:otherwise>
+                    <h1>${%The item you want to access has been renamed or removed.}</h1>
+
+                    <div>
+                        <t:editableDescription permission="${it.UPDATE}" />
+                    </div>
+
+                </j:otherwise>
+            </j:choose>
+        </l:main-panel>
+    </l:layout>
+</j:jelly>
